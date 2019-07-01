@@ -38,16 +38,16 @@ namespace Tavisca.Bootcamp.LanguageBasics.Exercise2
             //
             //now this block will be executed if there is no conflict in showposttime
             //
-            string[] myStrings = new string[exactPostTime.Length];
+            string[] resultant_date_time = new string[exactPostTime.Length];
             for(int i = 0; i<exactPostTime.Length; i++)
              {
-                string[] my=exactPostTime[i].Split(':');
+                string[] split_hh_mm_ss_string=exactPostTime[i].Split(':');
                 //
                 //for showposttime containing seconds
                 //
                 if(showPostTime[i].Contains("seconds"))
                 {
-                    myStrings[i]=exactPostTime[i];
+                    resultant_date_time[i]=exactPostTime[i];
                     
                 }
                 //
@@ -56,8 +56,8 @@ namespace Tavisca.Bootcamp.LanguageBasics.Exercise2
                 if(showPostTime[i].Contains("minutes"))
                 {
                     int r=Convert.ToInt32(showPostTime[i].Split(" ")[0]);
-                    int q=Convert.ToInt32(my[1]);
-                    int y=Convert.ToInt32(my[0]);
+                    int q=Convert.ToInt32(split_hh_mm_ss_string[1]);
+                    int y=Convert.ToInt32(split_hh_mm_ss_string[0]);
                     r=r+q;//calculating total minutes
                     //if minutes>59
                     if(r>59)
@@ -77,9 +77,9 @@ namespace Tavisca.Bootcamp.LanguageBasics.Exercise2
                     else{
                         t=Convert.ToString(y);
                     }
-                    string z=t+":"+Convert.ToString(q)+":"+my[2];
+                    string z=t+":"+Convert.ToString(q)+":"+split_hh_mm_ss_string[2];
                     
-                    myStrings[i]=z;
+                    resultant_date_time[i]=z;
                     
                 }
                 //
@@ -88,20 +88,20 @@ namespace Tavisca.Bootcamp.LanguageBasics.Exercise2
                 if(showPostTime[i].Contains("hours"))
                 {
                     int r=Convert.ToInt32(showPostTime[i].Split(" ")[0]);
-                    int y=Convert.ToInt32(my[0]);
+                    int y=Convert.ToInt32(split_hh_mm_ss_string[0]);
                     r=r+y;
                     //if hours>23 after addition
                     if(r>23)
                     {
                         r=r-24;
                     }
-                    string z=Convert.ToString(r)+":"+my[1]+":"+my[2];
-                    myStrings[i]=z;
+                    string z=Convert.ToString(r)+":"+split_hh_mm_ss_string[1]+":"+split_hh_mm_ss_string[2];
+                    resultant_date_time[i]=z;
                 }
             }
-            //soting string array for returning time which is the lexicographically smallest one out of all these times.
-            Array.Sort(myStrings ,StringComparer.InvariantCulture);
-            return myStrings[(exactPostTime.Length-1)];
+            //soting string array for returning resultant value as specified
+            Array.Sort(resultant_date_time ,StringComparer.InvariantCulture);
+            return resultant_date_time[(exactPostTime.Length-1)];
             throw new NotImplementedException();
         }
     }
